@@ -15,9 +15,9 @@ export const Message=(props)=>{
 
         await addDoc(messagesRef,{
             text:newMessage,
-            created_time:serverTimestamp,
+            created_time:serverTimestamp(),
             user:auth.currentUser.displayName,
-            room,
+            room:room
         })
 
         setNewMessage("");
