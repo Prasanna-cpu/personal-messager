@@ -20,7 +20,7 @@ const App = () => {
 
   return (<div> 
     {room ?
-     (<div><Message/></div>):
+     (<div><Message room={room}/></div>):
      (<div className='room'>
         <label>Enter Room Name:</label>
         <input ref={roomInputRef}/>
