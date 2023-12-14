@@ -14,6 +14,9 @@ export const Authentication = (props) => {
             const result = await signInWithPopup(auth, provider);
             //Set cookies
             cookies.set("auth-token", result.user.refreshToken);
+
+            const timeOutInMilli=10*60*1000;
+            cookies.set("auth-token",result.user.refreshToken,{maxAge:timeOutInMilli});
             setIsAuth(true);
         }
         catch(err){

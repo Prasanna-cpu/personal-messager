@@ -1,11 +1,18 @@
-import { useState } from "react";
-import {addDoc,collection,serverTimestamp} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import {addDoc,collection,serverTimestamp,onSnapshot, query, where} from "firebase/firestore";
 import {db,auth} from '../firebase-config'
 export const Message=(props)=>{
 
     const {room}=props
     const [newMessage,setNewMessage]=useState("")
-    const messagesRef=collection(db,"messages")
+    const messagesRef=collection(db,"messages");
+    useEffect(()=>{
+        const queryMessages=query(messagesRef,where("room","==",room));
+        onSnapshot(queryMessages,(snapshot)=>{
+            console.log(snapshot)
+            console.log(newMessage)
+        });
+    },[])
     async function submissisonHandler(e){
         e.preventDefault();
         console.log(newMessage)
